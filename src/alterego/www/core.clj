@@ -28,14 +28,7 @@
         (wrap-file public-dir)
         wrap-params)))
 
-(defonce server
-  (config/bind [^{:default 3000} port [:www :port]]
-    (jetty/run-jetty #'app {:port port :join? false})))
-
 (defn start
   []
-  (.start server))
-
-(defn stop
-  []
-  (.stop server))
+  (config/bind [^{:default 3000} port [:www :port]]
+    (jetty/run-jetty #'app {:port port :join? false})))

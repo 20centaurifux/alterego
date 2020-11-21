@@ -11,7 +11,9 @@
                  [markdown-clj "1.0.7"]
                  [org.clojure/core.cache "1.0.207"]
                  [zcfux/confick "0.1.0-SNAPSHOT"]
-                 [org.clojure/data.json "1.0.0"]]
+                 [zcfux/goophi "0.1.0-SNAPSHOT"]
+                 [org.clojure/data.json "1.0.0"]
+                 [aleph "0.4.6"]]
   :plugins [[lein-asset-minifier "0.4.4"]]
   :main ^:skip-aot alterego.core
   :minify-assets [[:js {:source ["node_modules/jquery/dist/jquery.js"
