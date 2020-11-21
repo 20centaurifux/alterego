@@ -1,0 +1,79 @@
+* {font-family:'Josefin Sans', sans-serif; font-size:14pt;}
+h1 {font-size:24pt;}
+h2 {font-size:16pt; margin-top:30px;}
+h3 {font-size:16pt; margin-top:30px;}
+p {margin-left:20px;}
+ul {margin-left:24px;}
+pre {margin-left:20px; word-wrap:break-word; white-space:pre-wrap;}
+a:hover {background:#ebeef9}
+table {padding-left:15px;}
+th {vertical-align:top; padding-bottom:3px;}
+td {vertical-align:top; padding:3px;}
+div.content {margin:auto; width:700px;}
+img.logo {float:right; padding:10px;}
+
+a.back-to-top
+{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:1em;
+  display:none;
+}
+
+a.back-to-top:hover {background-color:transparent;}
+a.project {font-weight:bold;}
+span.keywords {font-size:11pt; font-style:normal;}
+li.keywords {margin-bottom:10px;}
+img.forkme {position:fixed; top:0; left:0; border:0;}
+img.thumbnail {max-height:256px; max-width:256px; margin:10px;}
+a.thumbnail:hover {background:none;}
+a.image:hover {background:none}
+
+blockquote
+{
+  background:#f9f9f9;
+  border-left:10px solid #ccc;
+  margin:1.5em 10px;
+  padding:0.5em 10px;
+  quotes:"\201C""\201D""\2018""\2019";
+}
+
+blockquote:before
+{
+  color:#ccc;
+  content:open-quote;
+  line-height:0.1em;
+  margin-right:0.25em;
+  vertical-align:-0.4em;
+}
+
+blockquote p {display:inline;}
+
+code
+{
+  font-family:monospace;
+  font-size:10pt;
+  background-color:black;
+  color:#2bc900;
+  padding:5px;
+  display:block;
+  border-radius:5px;
+}
+
+img.webcam {border-radius:5px; max-width:100%; display:block; margin:auto;}
+p.webcam {text-align:center;}
+
+@media only screen and (max-device-width:750px)
+{
+  div.content {margin:50px; padding:0; width:auto;}
+  h1 {background-color:black; color:white; width:100%; margin:0; padding:2px; position:fixed; left:0; top:0; text-align:center; opacity:0.8; line-height:1.5;}
+  h2 {padding-top:20px;}
+  a.gohome {display:none;}
+  img.forkme {transform:rotate(90deg); left:auto; right:0; z-index:99;}
+  img.logo {float:none; margin:auto; display:block;}
+  p {margin-left:5px; padding-top:10px;}
+  ul {margin-left:0; padding-left:24px;}
+  img.thumbnail {max-height:196px; max-width:196px; margin:10px;}
+  span.keywords {font-size:11pt; font-style:italic; color:#4d4d4d;}
+}

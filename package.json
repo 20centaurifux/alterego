@@ -1,0 +1,16 @@
+{
+  "name": "alterego",
+  "version": "1.0.0",
+  "private": true,
+  "directories": {},
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "lightbox2": "^2.11.3"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/20centaurifux/my-website.git"
+  }
+}

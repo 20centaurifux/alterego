@@ -1,0 +1,7 @@
+{
+ :www {:port 8080
+       :private-dir "./files/www-private"
+       :public-dir "./files/www-public"
+       :cache-millis 30000 }
+ :github {:account "20centaurifux"}
+}
