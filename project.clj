@@ -22,6 +22,5 @@
                                  "files/www-public/pageinit.js"]
                         :target "files/www-public/www.min.js"}]
                   [:css {:source ["node_modules/lightbox2/dist/css/lightbox.css"
-                                  "files/www-public/base.css"
-                                  "files/www-public/josefin+sans.css"]
+                                  "files/www-public/base.css"]
                          :target "files/www-public/www.min.css"}]])

@@ -1,4 +1,17 @@
-* {font-family:'Josefin Sans', sans-serif; font-size:14pt;}
+@font-face {
+  font-family:'Monda';
+  font-style:normal;
+  font-weight:400;
+  src:url('monda-v10-latin-regular.eot'); /* IE9 Compat Modes */
+  src:local(''),
+      url('monda-v10-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+      url('monda-v10-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+      url('monda-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
+      url('monda-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+      url('monda-v10-latin-regular.svg#Monda') format('svg'); /* Legacy iOS */
+}
+
+* {font-family: 'Monda'}
 h1 {font-size:24pt;}
 h2 {font-size:16pt; margin-top:30px;}
 h3 {font-size:16pt; margin-top:30px;}
@@ -53,12 +66,12 @@ blockquote p {display:inline;}
 code
 {
   font-family:monospace;
-  font-size:10pt;
-  background-color:black;
-  color:#2bc900;
+  font-size:9pt;
+  background-color:#37474F;
+  color:#E0E0E0;
   padding:5px;
   display:block;
-  border-radius:5px;
+  border-radius:3px;
 }
 
 img.webcam {border-radius:5px; max-width:100%; display:block; margin:auto;}
