@@ -1,10 +1,12 @@
 {
  :goophi {:hostname "localhost"
           :port 8070
-          :directory "./files/gopher"}
- :www {:port 8080
+          :binding {:port 8070}
+          :directory "./files/gopher"
+          :fs {:file-extensions {"0" ["asc"]}}}
+ :www {:binding {:port 8080}
        :private-dir "./files/www-private"
        :public-dir "./files/www-public"
-       :cache-millis 0}
+       :cache-millis 300000}
  :github {:account "20centaurifux"}
 }

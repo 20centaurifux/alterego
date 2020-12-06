@@ -1,0 +1,43 @@
+Introduction
+------------------------------------------------------------
+
+icb-ws is an experimental HTML5 front-end for Internet CB
+Network.
+
+IArchitecture	/projects/Applications/icb-ws/architecture.png	@hostname	@port
+
+
+Website
+------------------------------------------------------------
+
+The front-end consists only of static web pages and scripts.
+Set the WebSocket url in modules/config.mjs.
+
+ILogin	/projects/Applications/icb-ws/login.jpg	@hostname	@port
+IChat	/projects/Applications/icb-ws/chat.jpg	@hostname	@port
+
+
+Service
+------------------------------------------------------------
+
+The service requires Autobahn. You need at least Python 3.7
+to start the service.
+
+  $ python3.7 icb-ws.py -U wss://localhost:7329 \
+    -L 127.0.0.1 -P 7329 \
+    -s internetcitizens.band -p 7326 \
+    --ssl-key localhost.key --ssl-cert localhost.crt
+
+
+Downloads
+------------------------------------------------------------
+
+9icb-ws-master.zip	/projects/Applications/icb-ws/icb-ws-master.zip	@hostname	@port
+
+
+WWW
+------------------------------------------------------------
+
+hicb-ws server	URL:https://internetcitizens.band/	@hostname	@port
+hGithub	URL:https://github.com/20centaurifux/icb-ws/	@hostname	@port
+hAutobahn	URL:https://github.com/crossbario/autobahn-python/	@hostname	@port

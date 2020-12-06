@@ -1,0 +1,30 @@
+Introduction
+------------------------------------------------------------
+
+confick is a tiny library to load and cache configuration
+settings from an EDN file.
+
+
+Installation
+------------------------------------------------------------
+
+This library can be installed from Clojars.
+
+  [zcfux/confick "0.1.0-SNAPSHOT"]
+
+
+Example
+------------------------------------------------------------
+
+  (require '[confick.core :as cnf])
+
+  (cnf/bind [^:required addr [:tcp :address]
+             ^{:default 80} port [:tcp :port]]
+    (format "%s:%d" addr port))
+
+Use bind* to assign configuration values at compile-time.
+
+
+WWW
+------------------------------------------------------------
+hGithub	URL:https://github.com/20centaurifux/confick/	@hostname	@port

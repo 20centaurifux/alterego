@@ -8,18 +8,22 @@
             [confick.core :as config]))
 
 (defroutes app-routes
-  (GET "/"
-       []
-       (page/index))
-  (GET "/project/:name"
-       [name]
-       (page/project name))
-  (GET "/ip"
-       {:as req}
-       (page/ip req))
-  (GET "/imprint"
-       []
-       (page/from-markdown "/imprint" "Imprint" "imprint.md"))
+  (GET
+    "/"
+    []
+    (page/index))
+  (GET
+    "/project/:name"
+    [name]
+    (page/project name))
+  (GET
+    "/ip"
+    {:as req}
+    (page/ip req))
+  (GET
+    "/imprint"
+    []
+    (page/from-markdown "/imprint" "Imprint" "imprint.md"))
   (route/not-found "404 page"))
 
 (defonce app
@@ -30,5 +34,5 @@
 
 (defn start
   []
-  (config/bind [^{:default 3000} port [:www :port]]
+  (config/bind [^{:default 3000} port [:www :binding :port]]
     (jetty/run-jetty #'app {:port port :join? false})))

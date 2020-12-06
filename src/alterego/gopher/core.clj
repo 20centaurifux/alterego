@@ -21,7 +21,7 @@
 
 (defn start
   []
-  (config/bind [^:required port [:goophi :port]]
+  (config/bind [^:required port [:goophi :binding :port]]
     (tcp/start-server
       (->gopher-handler routes)
       {:port port})))

@@ -34,6 +34,7 @@ $(document).ready(function()
   // update link targets:
   $('a[href^="http"]').attr('target', '_blank');
   $('a[href^="https"]').attr('target', '_blank');
+  $('a[href^="gopher"]').attr('target', '_blank');
 
   // set JS-enabled resources:
   $('a[href$="/nojs"]').each(function()

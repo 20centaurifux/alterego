@@ -1,0 +1,68 @@
+Introduction
+------------------------------------------------------------
+
+efind (extendable find) searches for files in a directory
+hierarchy.
+
+Basically it's a wrapper for GNU find providing an easier
+and more intuitive expression syntax. It can be extended by
+custom functions to filter search results. Furthermore, it
+has built-in sort and range functionality.
+
+
+Usage
+------------------------------------------------------------
+
+Running efind without any argument the search expression is
+read from standard input (stdin) and files are searched in
+the user's home directory. A different directory and
+expression can be specified with the --dir and --expr
+options:
+
+  $ efind --dir=/tmp --expr="size>1M and type=file"
+
+efind tries to handle the first arguments as path(s) and
+expression. It's valid to run efind the following way:
+
+  $ efind ~/git ~/code "type=file and name='CHANGELOG'"
+
+efind is shipped with a manpage, of course.
+
+  $ man efind
+
+
+Examples
+------------------------------------------------------------
+
+Print five largest files.
+
+  $ efind . "type=file" \
+            --order-by "-{bytes}" \
+            --printf " %-10{kb} | %{path}\n" \
+            --limit 5
+
+Find first text document containing a string and stop
+immediately.
+
+  $ efind . "name='*.txt' and text_contains('find me')" \
+    --limit 1
+
+Filter audio files by artist and convert them to WAV:
+
+  $ efind ~/Music \
+          "extension_in('.mp3, .ogg') and \
+          artist_matches('David Bowie')" \
+          --exec sox "%{filename}" tmp/"%{name}.wav" \;
+
+
+Downloads
+------------------------------------------------------------
+
+1Downloads	/projects/Applications/efind/downloads	@hostname	@port
+
+
+WWW
+------------------------------------------------------------
+
+hProject Website	URL:https://efind.dixieflatline.de/	@hostname	@port
+hGithub	URL:https://github.com/20centaurifux/efind/	@hostname	@port

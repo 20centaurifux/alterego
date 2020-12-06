@@ -37,15 +37,15 @@
 (defpage not-found
   []
   (tpl/subsite-from-md
-    "Page not found"
-    (read-file "md" "404.md")))
+   "Page not found"
+   (read-file "md" "404.md")))
 
 (defn- page-parts-from-json
   [filename]
   (map #(case (:type %)
           "markdown" (merge
-                       {:type :markdown :md (read-file "md/" (:md %))}
-                       (select-keys % [:title :no-title?]))
+                      {:type :markdown :md (read-file "md/" (:md %))}
+                      (select-keys % [:title :no-title?]))
           "projects" (update % :type keyword))
        (json/read-str (read-file filename) :key-fn keyword)))
 
