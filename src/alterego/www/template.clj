@@ -1,4 +1,5 @@
 (ns alterego.www.template
+  (:gen-class)
   (:use hiccup.page
         hiccup.element
         markdown.core))

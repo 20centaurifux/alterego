@@ -4,6 +4,6 @@
             [alterego.gopher.core :as gopher]))
 
 (defn -main
-  [& args]
+  []
   (www/start)
   (gopher/start))

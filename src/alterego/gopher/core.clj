@@ -1,4 +1,5 @@
 (ns alterego.gopher.core
+  (:gen-class)
   (:require [goophi.core :refer [info]]
             [goophi.routing :refer [defroutes]]
             [goophi.response :refer [menu-entity]]
@@ -10,18 +11,17 @@
 
 (defroutes routes
   ("URL\\:*"
-    [:as req]
-    (if-let [url (html/selector->url (:path req))]
-      (html/redirect url)
-      (menu-entity (info "Not found."))))
+   [:as req]
+   (if-let [url (html/selector->url (:path req))]
+     (html/redirect url)
+     (menu-entity (info "Not found."))))
   ("*"
-    [:as req]
-    (config/bind [^:required base-dir [:goophi :directory]]
-      (get-contents base-dir (:path req)))))
+   [:as req]
+   (config/bind [^:required base-dir [:goophi :directory]]
+     (get-contents base-dir (:path req)))))
 
 (defn start
   []
   (config/bind [^:required port [:goophi :binding :port]]
-    (tcp/start-server
-      (->gopher-handler routes)
-      {:port port})))
+    (tcp/start-server (->gopher-handler routes)
+                      {:port port})))

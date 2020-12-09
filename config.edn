@@ -8,5 +8,6 @@
        :private-dir "./files/www-private"
        :public-dir "./files/www-public"
        :cache-millis 300000}
+ :storage {:requests "sqlite:./files/storage.db"}
  :github {:account "20centaurifux"}
 }

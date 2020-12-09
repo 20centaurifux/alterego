@@ -1,11 +1,11 @@
 (ns alterego.www.page
+  (:gen-class)
   (:require [confick.core :as config]
             [clojure.core.cache :as cache]
             [alterego.www.template :as tpl]
             [clojure.data.json :as json]
             [ring.util.response :as r])
   (:import java.io.FileNotFoundException))
-
 
 (defonce ^:private page-cache
   (config/bind [^{:default 5000} ttl [:www :cache-millis]]
@@ -24,7 +24,6 @@
            content#)))))
 
 (defn- join-path
-  "Builds a filename from the given strings."
   [col]
   (str
    (apply clojure.java.io/file col)))
@@ -65,26 +64,18 @@
     (try
       (let [md (read-file "md"
                           "projects"
-                          (project-filename project-name))]
+                           (project-filename project-name))]
         (tpl/github-project (str "Project: " project-name)
-                            project-name
-                            github-account
-                            md))
+                             project-name
+                             github-account
+                             md))
       (catch FileNotFoundException _ (not-found)))))
 
 (defpage from-markdown
   [location title filename]
   (tpl/subsite-from-md title (read-file "md" filename)))
 
-(defn- request->ip
-  [req]
-  (if-let [ips (get-in req [:headers "x-forwarded-for"])]
-    (-> ips
-        (clojure.string/split #",")
-        first)
-    (:remote-addr req)))
-
 (defn ip
   [req]
-  (-> (r/response (request->ip req))
+  (-> (r/response (:client-ip req))
       (r/header "Content-Type" "text/plain; charset=utf-8")))

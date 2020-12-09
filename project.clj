@@ -13,9 +13,11 @@
                  [zcfux/confick "0.1.0"]
                  [zcfux/goophi "0.1.0-SNAPSHOT"]
                  [org.clojure/data.json "1.0.0"]
-                 [aleph "0.4.6"]]
-  :plugins [[lein-asset-minifier "0.4.4"]
-            [lein-cljfmt "0.7.0"]]
+                 [aleph "0.4.6"]
+                 [toucan "1.15.1"]
+                 [org.xerial/sqlite-jdbc "3.32.3.2"]
+                 [org.clojure/core.async "1.3.610"]]
+  :plugins [[lein-asset-minifier "0.4.4"]]
   :main ^:skip-aot alterego.core
   :profiles {:uberjar {:aot :all}}
   :minify-assets [[:js {:source ["node_modules/jquery/dist/jquery.js"
