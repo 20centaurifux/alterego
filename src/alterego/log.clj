@@ -13,7 +13,7 @@
     symbol
     use))
 
-(defn ->request-log-channel
+(defn- ->request-log-channel
   []
   (bind [^:required uri [:storage :requests]]
     (load-storage-ns uri)

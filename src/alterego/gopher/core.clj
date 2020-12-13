@@ -15,7 +15,7 @@
   (log-request! (:remote-addr request) :gopher (:path request))
   request)
 
-(def ^:private routes
+(defonce ^:private routes
   (->routes
    ("URL\\:*"
     [:as req]
@@ -27,7 +27,7 @@
     (config/bind [^:required base-dir [:goophi :directory]]
       (get-contents base-dir (:path req))))))
 
-(def ^:private app
+(defonce ^:private app
   (comp routes log))
 
 (defn start

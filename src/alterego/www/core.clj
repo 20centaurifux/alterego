@@ -9,7 +9,7 @@
             [alterego.log :refer [log-request!]]
             [confick.core :as config]))
 
-(defroutes app-routes
+(defroutes ^:private app-routes
   (GET
     "/"
     []
@@ -48,7 +48,7 @@
     (log-request! (:client-ip request) (:scheme request) (:uri request))
     (handler request)))
 
-(defonce app
+(defonce ^:private app
   (config/bind [^:required public-dir [:www :public-dir]]
     (-> app-routes
         (wrap-file public-dir)
