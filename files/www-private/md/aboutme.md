@@ -1,5 +1,4 @@
-Hi, my name is Sebastian. I'm a [Vim](http://www.vim.org/) and [Git](https://git-scm.com/)
-addicted software developer from Germany.
+Hi, my name is Sebastian. I'm a software developer from Germany.
 
 I made software for technical, administrative and safety management of yachts
 over the last decade. Now I work in parking space management.

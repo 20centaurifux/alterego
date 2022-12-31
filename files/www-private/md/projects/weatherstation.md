@@ -1,7 +1,6 @@
 # WeatherStation
 
-The Arduino Nano based weather station I'm developing at the moment. The
-project is still under construction.
+An Arduino Nano based weather station.
 
 The station measures temperature, atmospheric pressure, humidity and UV
 intensity. Data is stored using delta compression and sent over 433mhz in
