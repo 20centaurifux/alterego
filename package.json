@@ -4,7 +4,7 @@
   "private": true,
   "directories": {},
   "dependencies": {
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.3",
     "lightbox2": "^2.11.3"
   },
   "devDependencies": {},
