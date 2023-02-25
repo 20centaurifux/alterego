@@ -9,7 +9,7 @@ Installation
 
 This library can be installed from Clojars.
 
-  [zcfux/blocks-monger "0.2.1"]
+  [zcfux/blocks-monger "0.3.0"]
 
 
 Usage

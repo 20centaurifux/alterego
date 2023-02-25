@@ -14,25 +14,18 @@ Installation
 
 This library can be installed from Clojars.
 
-  [zcfux/severin-monger "0.2.0"]
+  [zcfux/severin-monger "0.3.0"]
 
 
 Usage
 ------------------------------------------------------------
 
-  ; create pool:
   (use 'severin.pool.monger)
 
   (def pool (severin.core/make-pool))
 
-  ; connect to MongoDB and use "test" database:
-  (def r (severin.core/create! pool "monger://localhost/test"))
-
-  ; do some stuff:
-  (mc/find (:db r) "foo" {})
-
-  ; dispose connection:
-  (severin.core/dispose! pool r)
+  (severin.core/with-pool pool [db "monger://localhost/test"]
+    (monger.core/find (:db r) "foobar" {}))
 
 
 WWW

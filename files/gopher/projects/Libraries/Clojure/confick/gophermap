@@ -10,7 +10,7 @@ Installation
 
 This library can be installed from Clojars.
 
-  [zcfux/confick "0.1.0-SNAPSHOT"]
+  [zcfux/confick "0.1.4"]
 
 
 Example

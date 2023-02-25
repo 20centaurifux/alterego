@@ -10,7 +10,7 @@ Installation
 
 This library can be installed from Clojars.
 
-  [zcfux/severin "0.2.0"]
+  [zcfux/severin "0.3.0"]
 
 
 Creating and releasing resources
@@ -58,10 +58,10 @@ factory.
       [this resource]
       "Tests if a resource is still valid."))
 
-The ->factory multimethod creates a factory from a URI by
+The make-factory multimethod creates a factory from a URI by
 dispatching on the scheme.
 
-  (defmulti ->factory
+  (defmulti make-factory
     "Creates a factory from a URI by dispatching on the scheme."
     #(-> %
          java.net.URI.
@@ -92,7 +92,6 @@ their URI.
     [...]
 
     URI->KeyProtocol
-
     (-uri->key
       [this uri]
       (-> uri
@@ -109,10 +108,8 @@ In this example we implement a pool for file input streams.
   (ns severin.example
     (:require [severin.core :refer :all]))
 
-  (defrecord FileReaderFactory
-    []
+  (defrecord FileReaderFactory []
     FactoryProtocol
-
     (-create!
       [this uri]
       (let [resource (clojure.java.io/make-input-stream uri {})]
@@ -132,7 +129,7 @@ In this example we implement a pool for file input streams.
       [this resource]
       true))
 
-  (defmethod ->factory "file" ; this registers FileReaderFactory
+  (defmethod make-factory "file" ; this registers FileReaderFactory
     [uri]
     (FileReaderFactory.))
 
