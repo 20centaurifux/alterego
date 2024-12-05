@@ -1,4 +1,4 @@
-(ns alterego.gopher
+(ns alterego.gopher.core
   (:require [aleph.http :as http]
             [clojure.spec.alpha :as s]
             [goophi.core :refer [info]]

@@ -1,4 +1,4 @@
-(ns alterego.html
+(ns alterego.www.html
   (:require [clojure.string :as str]
             [hiccup2.core :as h]))
 

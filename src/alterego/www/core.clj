@@ -1,5 +1,5 @@
-(ns alterego.www
-  (:require [alterego.html :as html]
+(ns alterego.www.core
+  (:require [alterego.www.html :as html]
             [clojure.java.io :as io]
             [clojure.spec.alpha :as s]
             [ring.middleware.file :as f]

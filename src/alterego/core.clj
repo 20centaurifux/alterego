@@ -2,8 +2,8 @@
   (:gen-class)
   (:require [aleph.http :as http]
             [aleph.tcp :as tcp]
-            [alterego.gopher :as gopher]
-            [alterego.www :as www]
+            [alterego.gopher.core :as gopher]
+            [alterego.www.core :as www]
             [clojure.spec.alpha :as s]
             [clojure.tools.logging :as log]
             [confick.core :as c]
