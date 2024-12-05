@@ -1,29 +1,16 @@
 (defproject alterego "0.1.0-SNAPSHOT"
-  :description "My web- & gopherspace."
-  :url "https://github.com/20centaurifux"
-  :license {:name "AGPLv3"
-            :url "https://www.gnu.org/licenses/agpl-3.0"}
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
+            :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.11.1"]
-                 [ring/ring-core "1.9.6"]
-                 [ring/ring-jetty-adapter "1.9.6"]
-                 [compojure "1.7.0"]
-                 [hiccup "1.0.5"]
-                 [markdown-clj "1.11.4"]
-                 [org.clojure/core.cache "1.0.225"]
-                 [zcfux/confick "0.1.4"]
-                 [zcfux/goophi "0.1.3"]
-                 [org.clojure/data.json "2.4.0"]
-                 [aleph "0.6.0"]
-                 [toucan "1.18.0"]
-                 [org.xerial/sqlite-jdbc "3.41.0.0"]
-                 [org.clojure/core.async "1.6.673"]]
-  :plugins [[lein-asset-minifier "0.4.6"]]
+                 [aleph "0.8.1"]
+                 [hiccup "2.0.0-RC3"]
+                 [de.dixieflatline/confick "0.2.0-SNAPSHOT"]
+                 [de.dixieflatline/goophi "0.2.0-SNAPSHOT"]
+                 [integrant "0.13.1"]
+                 [ring/ring-core "1.13.0"]]
   :main ^:skip-aot alterego.core
+  :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
-  :minify-assets [[:js {:source ["node_modules/jquery/dist/jquery.js"
-                                 "node_modules/lightbox2/dist/js/lightbox.js"
-                                 "files/www-public/pageinit.js"]
-                        :target "files/www-public/www.min.js"}]
-                  [:css {:source ["node_modules/lightbox2/dist/css/lightbox.css"
-                                  "files/www-public/base.css"]
-                         :target "files/www-public/www.min.css"}]])
+  :plugins [[dev.weavejester/lein-cljfmt "0.13.0"]])

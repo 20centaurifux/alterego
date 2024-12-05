@@ -1,13 +1,6 @@
-{
- :goophi {:hostname "localhost"
-          :port 8070
-          :binding {:port 8070}
-          :directory "./files/gopher"
-          :fs {:file-extensions {"0" ["asc"]}}}
- :www {:binding {:port 8080}
-       :private-dir "./files/www-private"
-       :public-dir "./files/www-public"
-       :cache-millis 300000}
- :storage {:requests "sqlite:./files/storage.db"}
- :github {:account "20centaurifux"}
-}
+{:gopher {:binding {:address "0.0.0.0" :port 7070}
+          :opts {:hostname "localhost"
+                 :port 7070
+                 :base-dir "./gopher"}}
+ :http {:binding {:address "0.0.0.0" :port 8080}
+        :opts {:asset-dir "./www"}}}

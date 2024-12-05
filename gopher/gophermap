@@ -1,0 +1,65 @@
+       ___      _                
+  ____/ (_)  __(_)__             
+ / __  / / |/_/ / _ \            
+/ /_/ / />  </ /  __/            
+\__,_/_/_/|_/_/\___/___          
+   / __/ /___ _/ /_/ (_)___  ___ 
+  / /_/ / __ `/ __/ / / __ \/ _ \
+ / __/ / /_/ / /_/ / / / / /  __/
+/_/ /_/\__,_/\__/_/_/_/ /_/\___/ 
+
+                                       Served with Goophi[1]
+
+About Me
+------------------------------------------------------------
+
+Hi, my name is Sebastian. I'm a software developer from
+Germany. You will mainly find here projects that I have
+developed in my free time.
+
+
+Projects
+------------------------------------------------------------
+
+1Applications	/projects/applications	@hostname	@port
+1Libraries	/projects/libraries	@hostname	@port
+1Hardware	/projects/hardware	@hostname	@port
+1Graveyard	/projects/graveyard	@hostname	@port
+
+
+Contact
+------------------------------------------------------------
+
+If you want to contact me please use email or Matrix:
+
+  * sebastian@dixieflatline.de
+  * @sebastian:matrix.dixieflatline.de
+
+GPG[2] is much appreciated. 
+
+0GPG key	/sebastian_at_dixieflatline.de.asc.txt	@hostname	@port
+
+
+World Wide Web
+------------------------------------------------------------
+hinternetcitizens.band	URL:https://internetcitizens.band/	@hostname	@port
+hefind.dixieflatline.de	URL:https://efind.dixieflatline.de/	@hostname	@port
+hMy GitHub account	URL:https://github.com/20centaurifux	@hostname	@port
+
+
+Who is Dixie Flatline?
+------------------------------------------------------------
+
+Dixie is my favorite character from Neuromancer[3].
+
+  A famous computer hacker named McCoy Pauley, who earned
+  his nickname by surviving three "flat-lines" while trying
+  to crack an AI. [...] Before his death, Sense/Net saved
+  the contents of his mind onto a ROM.
+
+
+References
+------------------------------------------------------------
+1[1]: Goophi	/projects/libraries/clojure/goophi	@hostname	@port
+h[2]: GNU Privacy Guard	URL:https://www.gnupg.org/	@hostname	@port
+h[3]: Wikipedia	URL:https://en.wikipedia.org/wiki/Neuromancer#Characters	@hostname	@port

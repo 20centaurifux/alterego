@@ -1,0 +1,52 @@
+Introduction
+------------------------------------------------------------
+
+lehmer is Lehmer code[1] implementation written in Clojure.
+You can use it to encode each possible permutation of a
+sequence of n numbers.
+
+
+Installation
+------------------------------------------------------------
+
+This library can be installed from Clojars[2].
+
+Leiningen/Boot
+--------------
+
+[de.dixieflatline/lehmer "0.1.0-SNAPSHOT"]
+
+
+Example
+------------------------------------------------------------
+
+  (require '[lehmer.core :as lehmer])
+
+  ;;; Use nth-permutation to compute permutations.
+  ;;; lehmer supports distinct lists, vectors and strings.
+  (lehmer/nth-permutation 5 "abc")
+  => "cab"
+
+  (lehmer/nth-permutation 5 [\a \b \c])
+  => [\c \a \b]
+
+  ;;; Provide a permutation and an ordered sequence of available
+  ;;; elements to compute the Lehmer code.
+  (lehmer/permutation->lehmer-code "cab" "abc")
+  => (2 0 0)
+
+  ;;; A Lehmer code can easily be converted to base 10.
+  (lehmer/lehmer-code->base-10 [2 0 0])
+  => 5
+
+
+References
+------------------------------------------------------------
+h[1]: Wikipedia	URL:https://en.wikipedia.org/wiki/Lehmer_code	@hostname	@port
+h[2]: Clojars	URL:https://clojars.org/de.dixieflatline/lehmer	@hostname	@port
+
+
+Links
+------------------------------------------------------------
+9main.zip	/github$/lehmer/archive/main	@hostname	@port
+hGitHub	URL:https://github.com/20centaurifux/lehmer/	@hostname	@port

@@ -1,0 +1,46 @@
+Introduction
+------------------------------------------------------------
+
+confick is a tiny library to load and cache configuration
+settings from an EDN file.
+
+
+Installation
+------------------------------------------------------------
+
+This library can be installed from Clojars[1].
+
+Leiningen/Boot
+--------------
+
+[de.dixieflatline/confick "0.2.0"]
+
+
+Example
+------------------------------------------------------------
+
+  (require '[confick.core :refer [bind lookup]])
+
+  ;; receive (mandatory) configuration value
+  (lookup [:tcp :address] :required true)
+
+  ;; bind configuration values in a let block
+  (bind [^:required addr [:tcp :address]
+         ^{:default 80 :conform nat-int?} port [:tcp :port]]
+    (println (format "%s:%d" addr port)))
+
+  ;; access configuration values in edn
+  (require '[confick.edn :as edn])
+
+  (edn/read-string "{:address #cnf/req [:tcp port] :port #cnf/or [[:tcp :port] 80]}")
+
+
+References
+------------------------------------------------------------
+h[1]: Clojars	URL:https://clojars.org/de.dixieflatline/confick	@hostname	@port
+
+
+Links
+------------------------------------------------------------
+9main.zip	/github$/confick/archive/main	@hostname	@port
+hGitHub	URL:https://github.com/20centaurifux/confick/	@hostname	@port

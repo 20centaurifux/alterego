@@ -1,0 +1,43 @@
+Introduction
+------------------------------------------------------------
+
+libdatatypes provides various abstract data types in plain C
+(C11). It's fast, has a small memory footprint and is
+well-documented. The library has been tested on x86, x86-64
+and ARMv6 with GCC and Clang.
+
+The following data types are available:
+
+  * hash table
+  * red-black tree
+  * associated array
+  * singly-linked list
+  * doubly-linked list
+  * queue
+  * stack
+  * byte-buffer
+  * asynchronous (message) queue
+
+
+Building
+------------------------------------------------------------
+
+To build the library GNU Make is required. Please edit the
+Makefile to change file locations and dependencies.
+
+The asynchronous message queue implementation requires POSIX
+threads. You can disable this feature in the related section
+of the Makefile.
+
+
+Documentation
+------------------------------------------------------------
+
+To generate the code documentation please run Doxygen. You
+find example code in the "test" directory.  Downloads
+
+
+Links
+------------------------------------------------------------
+9master.zip	/github$/datatypes/archive/master	@hostname	@port
+hGitHub	URL:https://github.com/20centaurifux/datatypes/	@hostname	@port

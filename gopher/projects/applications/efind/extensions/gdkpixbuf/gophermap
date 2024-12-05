@@ -1,0 +1,46 @@
+Introduction
+------------------------------------------------------------
+
+efind-gdkpixbuf is an extension for efind. It makes it
+possible to filter search results by image properties.
+
+You need gdk-pixbuf2 to build this extension.
+
+
+Available functions
+------------------------------------------------------------
+
+image_width()
+-------------
+
+Returns image width.
+
+  $ efind . 'image_width()>=800'
+
+
+image_height()
+--------------
+Returns image height.
+
+  $ efind . 'image_height()>=image_width()'
+
+
+image_has_alpha()
+-----------------
+
+Checks if image has an alpha channel.
+
+  $ efind . 'name="*.gif" and image_has_alpha()'
+
+
+image_bits_per_sample()
+-----------------------
+Gets the number of channels.
+
+  $ efind . 'image_bits_per_sample()>=2'
+
+
+Links
+------------------------------------------------------------
+9master.zip	/github$/efind-gdkpixbuf/archive/master	@hostname	@port
+hGitHub	URL:https://github.com/20centaurifux/efind-gdkpixbuf/	@hostname	@port

@@ -1,0 +1,120 @@
+Introduction
+------------------------------------------------------------
+
+flimflam is an email address validation library written in
+Clojure. It tests if a given email address conforms to the
+addr-spec specification as described in RFC 5322[1].
+
+
+Installation
+------------------------------------------------------------
+
+This library can be installed from Clojars [2].
+
+Leiningen/Boot
+--------------
+
+[de.dixieflatline/flimflam "0.1.0-SNAPSHOT"]
+
+
+Quick overview
+------------------------------------------------------------
+
+local-part
+----------
+
+The locally interpreted string is either a quoted-string or a
+dot-atom. If quoted, it may contain whitespace and quoted
+(control) characters. flimflam doesn't support obsolete syntax
+(obs-local-part).
+
+The following strings are valid email addresses:
+
+  * "John.Doe@example.org"
+  * "(nested (comment))John.Doe@example.org"
+  * "\"John\r\n Doe\"@example.org"
+  * "\"John@Doe\"@example.org"
+  * "\"\"@example.org"
+
+
+domain
+------
+
+The domain must be a hostname, a list of dot-separated (DNS)
+labels (see RFC 952[3], RFC 1035[4] and RFC 1123[5]) or an IP
+address. Labels must not consist of all numeric values. IPv6
+addresses with zone index (e.g. fe80::3dd0:7f8e:57b7:34d5%19)
+are not supported.
+
+The following strings are valid email addresses:
+
+  * "john.doe@(comment)\r\n localhost"
+  * "john.doe@example.org."
+  * "john.doe@[127.0.0.1]"
+  * "john.doe@[IPv6:2001:0db8::192.168.14.25]"
+
+
+Validation
+----------
+
+flimflam.core/valid? and flimflam.core/invalid? test if an
+email address conforms to the addr-spec specification.
+
+  user=> (require '[flimflam.core :as ff])
+
+  user=> (ff/valid? "john.doe@[IPv6:::]")
+  true
+
+  user=> (ff/invalid? "@localhost")
+  true
+
+  
+Normalization
+-------------
+
+ flimflam.core/normalize converts email addresses to a uniform
+format. It
+  
+  * removes unneccessary whitespace characters and comments.
+  * removes enclosing quotation marks from local-part when possible.
+  * normalizes IP addresses, hostnames and FQDNs.
+  
+Folding white space that occurs inside quoted-strings is
+interpreted as a single space character.
+
+
+  user=> (ff/normalize "john.doe@[IPv6:0000:0000:0000:0000:0000:0000:7f00:0001]")
+  "john.doe@[IPv6:::7f00:0001]"
+  
+  user=> (ff/normalize "john.doe@[IPv6:::127.0.0.1]")
+  "john.doe@[IPv6:::7f00:0001]"
+  
+  user=> (ff/normalize "john.doe@ExAmPlE.ORG.")
+  "john.doe@example.org"
+  
+  user=> (ff/normalize "john.doe@(hello world)example.org")
+  "john.doe@example.org"
+  
+  user=> (ff/normalize "john.doe   @example.org")
+  "john.doe@example.org"
+  
+  user=> (ff/normalize "\"john\\.doe\"@example.org")
+  "john.doe@example.org"
+  
+  user=> (ff/normalize "\"john\t\r\n   doe\"@example.org")
+  "\"john doe\"@example.org"
+
+
+References
+------------------------------------------------------------
+h[1]: RFC 5322	URL:https://www.rfc-editor.org/rfc/rfc5322#section-3.4.1	@hostname	@port
+h[2]: Clojars	URL:https://clojars.org/de.dixieflatline/flimflam	@hostname	@port
+h[3]: RFC 952	URL:https://www.rfc-editor.org/rfc/rfc952	@hostname	@port
+h[4]: RFC 1035	URL:https://www.rfc-editor.org/rfc/rfc1035	@hostname	@port
+h[5]: RFC 1123	URL:https://www.rfc-editor.org/rfc/rfc1123	@hostname	@port
+
+
+Links
+------------------------------------------------------------
+9main.zip	/github$/flimflam/archive/main	@hostname	@port
+hGitHub	URL:https://github.com/20centaurifux/flimflam/	@hostname	@port
