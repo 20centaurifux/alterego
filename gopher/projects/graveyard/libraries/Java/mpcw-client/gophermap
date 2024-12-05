@@ -132,7 +132,7 @@ Create a browser to query the music database:
 
 References
 ------------------------------------------------------------
-1mpcw	/projects/graveyard/mpcw	@hostname	@port
+1mpcw	/projects/graveyard/applications/mpcw	@hostname	@port
 
 
 Links
