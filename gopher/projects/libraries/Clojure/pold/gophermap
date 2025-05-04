@@ -14,7 +14,7 @@ This library can be installed from Clojars[1].
 Leiningen/Boot
 --------------
 
-[de.dixieflatline/pold "0.2.0-SNAPSHOT"]
+[de.dixieflatline/pold "0.1.0"]
 
 
 Usage
