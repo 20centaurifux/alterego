@@ -1,0 +1,98 @@
+Introduction
+------------------------------------------------------------
+
+TaskDeck is a task management application built as a deck
+for Decker[1].It helps you organize and prioritize your
+tasks visually.
+
+
+Features
+------------------------------------------------------------
+
+- Manage tasks with different priority levels
+  (LOW, MEDIUM, HIGH, IN PROGRESS)
+- Create, edit, and delete tasks
+- Add detailed notes to each task
+- Easily change task priorities
+- Reorder tasks within their priority groups
+- Dashboard view showing task counts by priority level
+
+
+Screenshots
+------------------------------------------------------------
+
+IDashboard	/projects/applications/taskdeck/dashboard.gif	@hostname	@port
+IOrganizer	/projects/applications/taskdeck/organizer.gif	@hostname	@port
+
+
+Installation
+------------------------------------------------------------
+
+Option 1: Use with Decker
+-------------------------
+
+1. Download and install Decker[1] if you haven't already
+2. Download the task.deck file
+3. Open the file with Decker
+
+
+Option 2: Use as HTML
+---------------------
+
+1. Export the deck as HTML from Decker
+2. Open the exported HTML file in any modern web browser
+
+
+How to Use
+------------------------------------------------------------
+
+Dashboard
+---------
+
+The dashboard shows four priority categories with task
+counts:
+- LOW
+- MEDIUM
+- HIGH
+- IN PROGRESS
+
+Click on any category to view and manage tasks in that
+priority level.
+
+
+Task Organizer
+--------------
+
+- Adding Tasks: Click the "+" button to add a new task
+- Editing Tasks: Select a task and modify its name, notes,
+  or priority
+- Changing Priority: Toggle the priority buttons (LOW,
+  MEDIUM, HIGH, IN PROGRESS)
+- Reordering: Use the "Up" and "Down" buttons to reorder
+  tasks
+- Deleting: Select a task and click "Delete/Done" to remove
+  it
+- Saving Changes: Click "Apply" to save changes to a task
+- Return to Dashboard: Click the "<<" button
+
+
+Development
+-----------
+
+TaskDeck is implemented using Decker's scripting language
+and widget system. The main cards are:
+
+- dashboard: Shows task counts by priority
+- organizer: Interface for managing tasks
+- tasks: Stores the task data
+
+
+References
+------------------------------------------------------------
+h[1]: Decker	URL:https://github.com/JohnEarnest/Decker	@hostname	@port
+
+
+Links
+------------------------------------------------------------
+9main.zip	/github$/taskdeck/archive/main	@hostname	@port
+hGitHub	URL:https://github.com/20centaurifux/taskdeck/	@hostname	@port
