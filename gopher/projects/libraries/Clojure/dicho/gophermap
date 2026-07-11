@@ -167,6 +167,18 @@ optimization:
   (handle-api-response (err :custom-error "Unknown")) ;; => "Unknown error"
 
 
+Validation Errors
+-----------------
+
+All functions validate their inputs using clojure.spec. Invalid responses
+throw ExceptionInfo with details about the validation failure:
+
+  ;; Invalid trace-id (must be non-empty string)
+  (ok "data" {:trace-id ""})
+  ;; Throws ExceptionInfo: "Invalid value for spec :dicho.specs/ok"
+  ;; ex-data contains: {:explain #:clojure.spec.alpha{[...]}}
+
+
 Unwrapping Responses
 --------------------
 
@@ -187,7 +199,8 @@ handling. OkResponse and ErrorResponse implement the
 HasFailed protocol.
 
   (require '[failjure.core :as f]
-           '[dicho.core :refer [ok err]])
+           '[dicho.core :refer [ok err]
+           '[dicho.bridges.failjure])
 
   (def success-response (ok "Success data"))
   (def error-response (err :not-found "Resource not found"))

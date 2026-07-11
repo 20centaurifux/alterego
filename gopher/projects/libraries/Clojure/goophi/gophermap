@@ -18,7 +18,7 @@ This library can be installed from Clojars [2].
 Leiningen/Boot
 --------------
 
-[de.dixieflatline/goophi "0.2.0"]
+[de.dixieflatline/goophi "0.2.1-SNAPSHOT"]
 
 
 Quick overview
