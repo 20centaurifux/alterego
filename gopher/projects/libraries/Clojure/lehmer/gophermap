@@ -9,12 +9,8 @@ sequence of n numbers.
 Installation
 ------------------------------------------------------------
 
-This library can be installed from Clojars[2].
-
-Leiningen/Boot
---------------
-
-[de.dixieflatline/lehmer "0.1.0-SNAPSHOT"]
+This library can be installed from Clojars [2] using
+Leiningen.
 
 
 Example

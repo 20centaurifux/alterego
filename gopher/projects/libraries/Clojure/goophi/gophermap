@@ -15,11 +15,6 @@ Installation
 
 This library can be installed from Clojars [2].
 
-Leiningen/Boot
---------------
-
-[de.dixieflatline/goophi "0.2.1-SNAPSHOT"]
-
 
 Quick overview
 ------------------------------------------------------------
@@ -35,10 +30,9 @@ following keys:
   * params: parameters found in selector
   * remote-addr: remote ip address (added by the Aleph handler)
 
-The routing module checks whether a path from the request map
-matches a pattern and evaluates the corresponding body upon success. The
-routing module converts a Gopher request to a map & evaluates a function
-returning an entity.
+The routing module checks whether a path from the request
+map matches a pattern and evaluates the corresponding body
+upon success.
 
   (use 'goophi.core)
   (use 'goophi.routing)
@@ -93,13 +87,15 @@ support.
   ->   |\__/,|   (`\
   ->  _.|o o  |_   ) )
   -> -(((---(((--------
-  -> .)
+  -> .
 
 
 redirection module
 ------------------
 
 URLs are displayed on an HTML redirection page.
+
+  (use 'goophi.redirect)
 
   (def redirect-example
     (route

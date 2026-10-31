@@ -11,11 +11,6 @@ Installation
 
 This library can be installed from Clojars [2].
 
-Leiningen/Boot
---------------
-
-[de.dixieflatline/flimflam "0.1.0-SNAPSHOT"]
-
 
 Quick overview
 ------------------------------------------------------------

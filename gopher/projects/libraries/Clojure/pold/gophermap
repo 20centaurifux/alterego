@@ -9,12 +9,7 @@ accumulating them into a result.
 Installation
 ------------------------------------------------------------
 
-This library can be installed from Clojars[1].
-
-Leiningen/Boot
---------------
-
-[de.dixieflatline/pold "0.1.0"]
+This library can be installed from Clojars [1].
 
 
 Usage
@@ -41,7 +36,8 @@ accumulator, updating it.
         [1 1 2 4 3 9])
         ; => (2 6 12)
 
-When no collection is provided pold returns a stateful transducer.
+When no collection is provided pold returns a stateful
+transducer.
 
   (eduction (comp (pold (partitioner (part odd? identity +)))
                   (filter #(> % 2)))
@@ -99,7 +95,7 @@ transformed into a list of nested maps.
       :title "Welcome to Europe"}
      {:artist "Squarepusher"
       :album "Welcome to Europe"
-      :track 
+      :track 2
       :title "Hanningfield Window"}
      {:artist "Squarepusher"
       :album "Welcome to Europe"
@@ -108,9 +104,8 @@ transformed into a list of nested maps.
      {:artist "Autechre"
       :album "Anti"
       :track 1
-      :title
-      "Lost"}
-     {:artist"Autechre"
+      :title "Lost"}
+     {:artist "Autechre"
       :album "Anti"
       :track 2
       :title "Djarum"}
@@ -119,24 +114,24 @@ transformed into a list of nested maps.
       :track 3
       :title "Flutter"}])
 
-(defn- make-partitioner
-  []
-  (partitioner
-   (part :artist
-         (fn [{:keys [artist]}]
-           {:artist artist
-            :albums []})
-         #(update-in %1 [:albums] conj %2))
+  (defn- make-partitioner
+    []
+    (partitioner
+     (part :artist
+           (fn [{:keys [artist]}]
+             {:artist artist
+              :albums []})
+           #(update-in %1 [:albums] conj %2))
 
-   (part :album
-         (fn [{:keys [album]}]
-           {:title album
-            :songs []})
-         #(update-in %1 [:songs] conj %2))
+     (part :album
+           (fn [{:keys [album]}]
+             {:title album
+              :songs []})
+           #(update-in %1 [:songs] conj %2))
 
-   (part :track
-         (fn [{:keys [title]}]
-           title))))
+     (part :track
+           (fn [{:keys [title]}]
+             title))))
 
   (pold (make-partitioner) songs)
   ; => [{:artist "Aphex Twin", :albums [{:title "On"

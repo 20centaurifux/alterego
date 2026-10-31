@@ -8,12 +8,8 @@ pools, such as network and database connections.
 Installation
 ------------------------------------------------------------
 
-This library can be installed from Clojars[1].
-
-Leiningen/Boot
---------------
-
-[zcfux/severin "0.3.0"]
+This library can be installed from Clojars [1] using
+Leiningen.
 
 
 Creating and releasing resources
@@ -33,7 +29,7 @@ resources are bound to names. The finally clause calls
 dispose! on each name.
 
   (with-pool pool [db "monger://localhost"
-                   file "file:///var/log/out"]
+                   file "file:///tmp/helloworld.txt"]
    ; do something
   )
 
@@ -71,7 +67,7 @@ dispatching on the scheme.
          .getScheme))
 
 
-Pool internal
+Pool internals
 ------------------------------------------------------------
 
 A pool is a Ref holding a map. It can be created with
@@ -88,7 +84,7 @@ by implementing the URI->KeyProtocol.
 
 When implementing a pool for network connections like HTTP
 you might want to group resources by hostname instead of
-their URI.
+the full URI.
 
   (defrecord HttpFactory
 
@@ -142,6 +138,7 @@ resource is recycled.
 
 Let's create a pool and open a file.
 
+  ; queues can grow up to 5 resources
   => (def pool (make-pool :max-size 5))
   => (def s (create! pool "file:///tmp/some/file"))
 
@@ -198,7 +195,8 @@ custom types.
       [this uri]
       (let [stream (clojure.java.io/make-input-stream uri {})]
         (.mark stream 0)
-        {:stream stream :uri uri}))
+        {:uri uri
+         ::stream stream}))
 
     [...])
 

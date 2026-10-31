@@ -23,7 +23,10 @@ functions like filter, remove, and some.
 Installation
 ------------------------------------------------------------
 
-zeef is available via Clojars [1].
+zeef is available via Clojars [1]. Add the following
+dependency to your project.clj:
+
+  :dependencies [[de.dixieflatline/zeef "0.1.0-SNAPSHOT"]]
 
 
 Quick Start
@@ -234,6 +237,12 @@ string:
   ;; Serialize to EDN string
   (def serialized-filter (pr-str user-filter))
 
+  ;; Contents of the EDN string, wrapped for readability:
+  ;; [:and [:>= #zeef/field :age 18]
+  ;;       [:= #zeef/field :status "active"]
+  ;;       [:some? #zeef/field :orders
+  ;;        [:> #zeef/field :amount 100]]]
+
   ;; Deserialize back to filter expression
   (def deserialized-filter (zt/read-string serialized-filter))
 
@@ -391,5 +400,5 @@ h[1]: Clojars	URL:https://clojars.org/de.dixieflatline/zeef	@hostname	@port
 
 WWW
 ------------------------------------------------------------
-9master.zip	/github$/zeef/archive/main	@hostname	@port
+9main.zip	/github$/zeef/archive/main	@hostname	@port
 hGitHub	URL:https://github.com/20centaurifux/zeef/	@hostname	@port
