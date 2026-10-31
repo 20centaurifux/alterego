@@ -1,0 +1,258 @@
+Introduction
+------------------------------------------------------------
+
+supervise is a Clojure library for managing a worker thread
+through a synchronized lifecycle. A component wraps a worker
+function and provides synchronous lifecycle operations
+through start! and stop!. State transitions can be observed
+through an optional callback.
+
+Work in progress: supervise is under active development. Its
+API, semantics, and implementation details may still change.
+The library should not yet be considered a stable production
+dependency.
+
+
+Installation
+------------------------------------------------------------
+
+This library can be installed from Clojars [1].
+
+
+Creating a component
+------------------------------------------------------------
+
+Create a component by passing a worker function and,
+optionally, an options map to component:
+
+  (require '[supervise.core :as supervise])
+
+  (def service
+    (supervise/component
+      (fn [interrupt-token]
+        (loop []
+          ;; Perform the worker's task.
+          (supervise/await! interrupt-token 1000)
+          (recur)))
+      {:restart-after-termination? true
+       :restart-after-failure? true
+       :on-transit println}))
+
+When no options are needed, the options map can be omitted:
+
+  (def service (supervise/component worker-fn))
+
+The worker function, options map, and values assigned to
+supported options are validated when the component is
+created. Invalid arguments cause an ExceptionInfo containing
+Clojure Spec explanation data.
+
+The worker function receives an interrupt token. check!
+checks whether the worker has been interrupted, while await!
+waits for the specified number of milliseconds. Both
+functions must be called from the worker thread associated
+with the token. They throw InterruptedException after an
+interrupt. When the interrupt was requested by stop!,
+supervise handles it as the worker stopping normally. An
+InterruptedException without an active stop request is
+treated as a worker failure and retained as its cause.
+
+
+start!
+------------------------------------------------------------
+
+  (supervise/start! service)
+
+start! starts the worker and blocks until it has reached
+:running. It returns nil on success.
+
+The exact behavior depends on the component's current state:
+
+  * In :stopped, a new worker generation is created and
+    started.
+  * In :starting, the call waits for the start already in
+    progress. It does not create a second worker.
+  * In :running, the call has no effect and immediately
+    returns nil.
+  * In :stopping, the call waits until the current worker
+    has stopped and then evaluates again whether it may
+    start a worker.
+  * In :terminated, a new worker is started only when
+    :restart-after-termination? is enabled. Otherwise,
+    start! throws an ExceptionInfo containing the
+    :terminated state.
+  * In :failed, a new worker is started only when
+    :restart-after-failure? is enabled. Otherwise, start!
+    throws an ExceptionInfo containing the :failed state and
+    the original failure as its cause.
+
+If the underlying Java thread cannot be started, the
+component transitions to :failed, and start! rethrows the
+error.
+
+Concurrent calls to start! create only one worker for the
+same start attempt. The other calls wait for that worker to
+start or observe that the component is already running.
+
+The component's own worker must not call start! while the
+component is stopping because it cannot wait synchronously
+for its own thread to terminate. Such a call is rejected
+with an IllegalStateException.
+
+
+stop!
+------------------------------------------------------------
+
+  (supervise/stop! service)
+
+stop! attempts to interrupt a running worker and blocks
+until its thread has terminated. Once the thread terminates,
+it returns nil even when the worker finishes in :failed; the
+failure remains observable through :on-transit and when
+automatic restart after failure is disabled, as the cause of
+a subsequent rejected start!.
+
+If interrupting the worker throws, stop! propagates the
+exception. The component remains in :running, and no
+:stopping notification is emitted, so a later stop! can try
+again.
+
+Its exact behavior also depends on the current state:
+
+  * In :starting, the call first waits for the start to
+    complete and then tries to stop the component again.
+  * In :running, the call interrupts the worker while
+    holding the lifecycle lock. If the interrupt succeeds,
+    the component transitions to :stopping and the call
+    waits for the worker thread to terminate.
+  * In :stopping, the call waits for the stop already in
+    progress to complete.
+  * In :stopped, :terminated, or :failed, the call has no
+    effect and immediately returns nil.
+
+stop! must not be called synchronously from the component's
+own worker thread. Such a call could wait for the same
+thread to terminate and is therefore rejected with an
+IllegalStateException. A worker should instead return from
+its function when it needs to terminate itself.
+
+Interruption is cooperative: the worker must react to the
+interrupt, for example by calling check! or await!, or by
+using another interruptible operation. If it ignores the
+interrupt, stop! continues waiting until the worker actually
+terminates.
+
+
+States
+------------------------------------------------------------
+
+A component can be in one of the following states:
+
+:stopped
+  The initial state or the result of a successful stop!. No
+  worker is running.
+
+:starting
+  A new worker generation has been created, but its thread
+  has not yet reported :running.
+
+:running
+  The worker has started and is executing its function.
+
+:stopping
+  The worker has been asked to stop, but its thread has not
+  yet terminated.
+
+:terminated
+  The worker function returned on its own without an error.
+
+:failed
+  The worker function, an unexpected interruption, or the
+  attempt to start its thread failed. The error is retained
+  as the cause.
+
+
+ILifecycle diagram	/projects/libraries/Clojure/supervise/lifecycle.png	@hostname	@port
+
+
+Restart options
+------------------------------------------------------------
+
+:restart-after-termination?
+---------------------------
+
+When this option is true, start! may start a new worker
+generation for a component in :terminated. Without the
+option, a component whose worker terminated normally cannot
+be started again.
+
+  {:restart-after-termination? true}
+
+
+:restart-after-failure?
+-----------------------
+
+When this option is true, start! may start a new worker
+generation for a component in :failed. The previously stored
+failure is cleared for the new start. Without the option,
+start! exposes the previous failure as its cause.
+
+  {:restart-after-failure? true}
+
+Both options are disabled by default and accept boolean
+values. They affect only start! in their respective terminal
+states. A worker that was explicitly stopped can always be
+started again from :stopped.
+
+
+Lifecycle notifications and generations
+------------------------------------------------------------
+
+Use :on-transit to register a function that receives a map
+for every state transition:
+
+  {:on-transit
+   (fn [{:keys [generation from to cause]}]
+     (println "Generation" generation ":" from "->" to)
+     (when cause
+       (println "Cause:" cause)))}
+
+Each notification contains the following keys:
+
+  * :generation is the worker generation number. It starts
+    at 1 for the first start and increases whenever a new
+    worker is actually created.
+  * :from is the previously reported state.
+  * :to is the new state.
+  * :cause is the original throwable and is present only
+    when :to is :failed.
+
+Callbacks run asynchronously, but in the same order as the
+state transitions. A slow callback therefore does not block
+start!, stop!, or the worker. Callback errors are caught so
+that subsequent notifications can still be delivered.
+
+Listeners can also be added and removed while the component
+is running:
+
+  (def listener #(println "transition:" %))
+
+  (supervise/add-listener! service listener)
+  (supervise/remove-listener! service listener)
+
+Listeners run asynchronously. Registering the same listener
+more than once has no effect, and their invocation order is
+unspecified. Removing an unknown listener has no effect.
+Because delivery is asynchronous, an event already queued
+when a listener is removed may still be delivered to it.
+
+
+References
+------------------------------------------------------------
+h[1]: Clojars	URL:https://clojars.org/de.dixieflatline/supervise	@hostname	@port
+
+
+Links
+------------------------------------------------------------
+9main.zip	/github$/supervise/archive/main	@hostname	@port
+hGitHub	URL:https://github.com/20centaurifux/supervise/	@hostname	@port
