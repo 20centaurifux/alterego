@@ -1,0 +1,71 @@
+Introduction
+------------------------------------------------------------
+
+persona is a lightweight hierarchical authorization library
+for Clojure. It is currently a work in progress.
+
+It checks whether a subject may perform a permission on a
+resource, independently of authentication and identity
+providers.
+
+
+Installation
+------------------------------------------------------------
+
+This library can be installed from Clojars [1].
+
+
+Authorization model
+------------------------------------------------------------
+
+- Namespaces isolate personas and assignments.
+- Personas contain sets of permissions.
+- Subjects identify users, groups, or service accounts.
+- Assignments bind subjects to personas within a scope.
+- The application supplies the resource's scope path,
+  including its parents, for hierarchical authorization.
+
+Personas and assignments can be changed at runtime. Storage
+is backend-independent; an in-memory store is included.
+
+
+Example
+------------------------------------------------------------
+
+  (require '[persona.core :as persona]
+           '[persona.store.memory :as memory])
+
+  (def store (memory/->memory-store))
+
+  (persona/put-persona!
+   store :acme
+   {:id :editor
+    :name "Editor"
+    :permissions #{:document/read :document/write}})
+
+  (persona/put-assignments!
+   store :acme :editor
+   [{:subject {:provider :ldap :id "team:editors"}
+     :scope {:kind :project :id "website"}}])
+
+  (persona/allowed?
+   store :acme
+   #{{:provider :ldap :id "team:editors"}}
+   :document/write
+   [{:kind :document :id "design.md"}
+    {:kind :project :id "website"}])
+  ;; => true
+
+The project assignment grants access to the document through
+the supplied parent scope.
+
+
+References
+------------------------------------------------------------
+h[1]: Clojars	URL:https://clojars.org/de.dixieflatline/persona	@hostname	@port
+
+
+Links
+------------------------------------------------------------
+9main.zip	/github$/persona/archive/main	@hostname	@port
+hGitHub	URL:https://github.com/20centaurifux/persona/	@hostname	@port
